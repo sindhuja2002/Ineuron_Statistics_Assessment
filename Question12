@@ -1,0 +1,66 @@
+#question 12
+#a
+print("a: To Conduct a t-test to determine if there is a significant difference in the mean scores between the two groups")
+print("--------------------------------------------------------------------------------------------------------------------")
+import scipy.stats as stats
+
+# Group A data
+mean_a = 2.5
+std_a = 0.8
+n_a = 30
+
+# Group B data
+mean_b = 2.2
+std_b = 0.6
+n_b = 30
+
+# Perform independent t-test
+t_statistic, p_value = stats.ttest_ind_from_stats(mean_a, std_a, n_a, mean_b, std_b, n_b)
+
+# Print the results
+print("T-Test Results:")
+print()
+print("t-statistic:", t_statistic)
+print("p-value:", p_value)
+print()
+
+alpha=0.05
+if p_value < alpha:
+    print(f"As p_value : {p_value} < significance_level/alpha : {alpha}")
+    print("Yes,There is a equality of mean for between all the classes")
+    print("Reject the null hypothesis")
+    print("There is a significant difference in the means of the two groups.")
+elif p_value >= alpha: 
+    print(f"As p_value : {p_value} >= significance_level/alpha : {alpha}")
+    print("No,There is no significant difference in the means of the two groups.")
+    print("Fail to reject the null hypothesis")
+    
+    
+    
+#b
+print("b: Based on the t-test results, state whether the null hypothesis should be rejected or not.")
+print("--------------------------------------------------------------------------------------------------")
+print(f"As p_value : {p_value} >= significance_level/alpha : {alpha}")
+print("No,There is no significant difference in the means of the two groups.")
+print("Fail to reject the null hypothesis")
+print()
+print()
+print("To Provide a conclusion in the context of the study.")
+print("-------------------------------------------------------")
+print("""
+According to the t-test results, there is no significant difference in mean improvement scores between 
+Group A (getting the new treatment) and Group B (receiving the standard drug) for treating the specific ailment. 
+As a result, the study provides no evidence to support the claim that the new medicine is more effective than the traditional drug.
+
+It is important to highlight that this finding is based on the unique sample of patients included in the study. 
+
+More study with a bigger sample size or varied patient demographics may be required to make more definitive conclusions. 
+Other aspects, such as side effects, cost-effectiveness, and patient preferences, 
+should also be addressed while making treatment selections.
+
+""")
+
+    
+    
+    
+    
