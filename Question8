@@ -1,0 +1,31 @@
+#question 8
+print("To Use the Wilcoxon signed-rank test to test whether the therapy had a significant effect on anxiety levels")
+print("--------------------------------------------------------------------------------------------------------------")
+import scipy.stats as stats
+import pandas as pd
+
+# Read data from Excel file
+data = pd.read_excel('data2.xlsx')
+
+
+# Extract the required columns
+before_therapy = data['before therapy']
+after_therapy = data['after therapy']
+difference = data['difference']
+
+# Perform Wilcoxon signed-rank test
+statistic, p_value = stats.wilcoxon(difference)   # returns the test statistic and the p-value.
+
+print("Wilcoxon statistic:", statistic)
+print("p-value:", p_value)
+print()
+
+# Interpret the results
+significance_level= 0.05
+if p_value < 0.05:
+    print(f"As pvalue : {p_value} < significance_level : {significance_level}")
+    print("Yes,The therapy had a significant effect on anxiety levels (reject null hypothesis)")
+elif p_value >= 0.05:
+    print(f"As p_value : {p_value} >= significance_level : {significance_level}")
+    print("The therapy did not have a significant effect on anxiety levels (fail to reject null hypothesis)")
+
