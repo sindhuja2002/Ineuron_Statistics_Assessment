@@ -1,0 +1,131 @@
+#question 11
+#a
+print("a: To Check whether the distribution of all the classes are the same or not")
+print("------------------------------------------------------------------------------")
+import pandas as pd
+import scipy.stats as stats
+
+# Read the data from the provided CSV file
+data = pd.read_csv('data.csv')
+
+# Perform Kruskal-Wallis test
+significance_level = 0.05
+kruskal_result = stats.kruskal(data[' Blood Pressure Before '], data[' Blood Pressure After '])
+
+# Print the test statistic and p-value
+print("Kruskal-Wallis test statistic:", kruskal_result.statistic)
+print("Kruskal-Wallis test p-value:", kruskal_result.pvalue)
+print()
+if kruskal_result.pvalue < significance_level:
+  print(f"As p_value : {kruskal_result.pvalue} < significance_level : {significance_level}")
+  print("No,The distribution of all the classes is not the same.")
+  print()
+  print("we have enough evidence to reject the null hypothesis that the distributions are the same.")
+elif kruskal_result.pvalue >= significance_level:
+  print(f"As p_value : {kruskal_result.pvalue} >= significance_level : {significance_level}")
+  print("Yes,The distribution of all the classes is the same (Fail to reject the null hypothesis)")
+
+
+
+#b
+print("b: To Check for the equality of variance")
+print("---------------------------------------")
+# Perform Levene's test
+statistic, p_value = stats.levene(data[' Blood Pressure Before '], data[' Blood Pressure After '])
+
+# Print the results
+print("Levene's test statistic:", statistic)
+print("Levene's test p-value:", p_value)
+print()
+if p_value  <  significance_level:
+  print(f"As p_value : {p_value} < significance_level : {significance_level}")
+  print("No,There is no equality of variance (Reject the null hypothesis)")
+elif p_value  >=  significance_level:
+  print(f"As p_value : {p_value} >= significance_level :{significance_level}")
+  print("Yes,There equality of variance (Fail to reject the null hypothesis)")
+  
+  
+  #c
+print("c: To Which amount LDA and QDA would perform better on this data for classification and why")
+print("-----------------------------------------------------------------------------------------------")
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
+
+# Load the data from the CSV file
+data = pd.read_csv('data.csv')
+
+# Extract the features and target variable
+X = data[[' Blood Pressure Before ', ' Blood Pressure After ']]
+y = data['Patient ID']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create LDA and QDA models
+lda = LinearDiscriminantAnalysis()
+qda = QuadraticDiscriminantAnalysis()
+
+try:
+    # Fit the models on the training data
+    lda.fit(X_train, y_train)
+    qda.fit(X_train, y_train)
+
+    # Predict the classes for the testing data
+    lda_predictions = lda.predict(X_test)
+    qda_predictions = qda.predict(X_test)
+
+    # Print the predicted classes
+    print("LDA Predictions:")
+    print(lda_predictions)
+    print()
+    print("QDA Predictions:")
+    print(qda_predictions)
+
+except ValueError as e:
+    print("ValueError occurred:", e)
+    print("LDA and QDA cannot be performed on the given data.")
+    print()
+    print("Alternative classification techniques such as : Decision Trees")
+    print("                                              : Random Forests")
+    print("                                              : Support Vector Machines (SVM")
+    print("                                              : Nearest Neighbors")
+    print("                                              : Naive Bayes:")
+    print("                                              : Ensemble Methods")
+    print("                                              : Ensemble Methods")
+  
+
+
+#d
+print("d: To Check the equality of mean for between all the classes")
+#ANOVA test is used by assuming data is nrml distribution + variances of 2grps are equal
+print("--------------------------------------------------------------")
+import pandas as pd
+from scipy.stats import f_oneway
+
+# Load the data from the CSV file
+data = pd.read_csv('data.csv')
+
+# Extract the blood pressure before and after measurements
+bp_before = data[' Blood Pressure Before ']
+bp_after = data[' Blood Pressure After ']
+
+# Perform ANOVA test
+statistic, p_value = f_oneway(bp_before, bp_after)
+
+# Print the results
+print("ANOVA Test Results:")
+print()
+print("Test Statistic:", statistic)
+print("p-value:", p_value)
+print()
+
+# Interpret the results
+alpha = 0.05
+if p_value < alpha:
+    print(f"As p_value : {p_value} < significance_level/alpha : {alpha}")
+    print("Yes,There is a equality of mean for between all the classes")
+    print("There is a significant difference in the means of the two groups.")
+elif p_value >= alpha:
+    print(f"As p_value : {p_value} >= significance_level/alpha : {alpha}")
+    print("No,There is no significant difference in the means of the two groups.")
