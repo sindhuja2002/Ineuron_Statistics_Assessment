@@ -1,0 +1,23 @@
+#question 6
+import pandas as pd
+import scipy.stats as stats
+
+# Read data from CSV file
+data = pd.read_csv('data.csv')
+
+# Perform Shapiro-Wilk normality test - to find nrml dist\not ----- returns test statistic and a p-value.
+_, p_value_before = stats.shapiro(data[' Blood Pressure Before '])
+print(f"_, p_value_before : {_, p_value_before}")
+_, p_value_after = stats.shapiro(data[' Blood Pressure After '])
+print(f"_, p_value_after  : {_, p_value_after}")
+print()
+
+
+# Interpret the results
+alpha = 0.05 #significance level,set to 0.05 
+
+if p_value_before > alpha and p_value_after > alpha:
+    print("The change in blood pressure follows a normal distribution.")
+else:
+    print(f"Since p_value_before and p_value_after are not greater, The change in blood pressure does not follow a normal distribution.")
+
