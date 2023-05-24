@@ -45,3 +45,120 @@ print("After - Standard Deviation: {:.2f}".format(std_dev_after))
 #range -  difference between the maximum and minimum values 
 #variance - The variance measures the average squared deviation from the mean. A higher variance indicates greater dispersion
 #std - The standard deviation is the square root of the variance
+
+
+
+
+#b
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("b: To Calculate mean and 5% confidence interval and plot it in a graph ")
+print("----------------------------------------------------------------------------------")
+
+# Calculate mean and confidence interval
+mean_before = np.mean(bp_before)
+mean_after = np.mean(bp_after)
+
+confidence_interval_before = stats.norm.interval(0.95, loc=mean_before, scale=std_dev_before / np.sqrt(len(bp_before)))
+confidence_interval_after = stats.norm.interval(0.95, loc=mean_after, scale=std_dev_after / np.sqrt(len(bp_after)))
+
+# Plotting the means and confidence intervals
+labels = ['Blood Pressure Before', 'Blood Pressure After']
+means = [mean_before, mean_after]
+confidence_intervals = [confidence_interval_before, confidence_interval_after]
+print(f"confidence_interval_before : {confidence_interval_before}")
+print(f"confidence_interval_after : {confidence_interval_after}")
+print(f"confidence_intervals: {confidence_intervals}")
+print()
+print()
+
+plt.errorbar(labels, means, yerr=[(ci[1] - mean) for ci, mean in zip(confidence_intervals, means)], fmt='o')
+plt.ylabel('Mean Blood Pressure (mmHg)')
+plt.title('Mean Blood Pressure Before and After')
+plt.show()
+
+#b
+#b example by substituting the values mathematically
+
+import numpy as np
+
+# Given sample statistics
+sample_mean = 130
+sample_std_dev = 10
+sample_size = 50
+
+# Calculate standard error
+standard_error = sample_std_dev / np.sqrt(sample_size)
+
+# Set the critical value for a 5% confidence level
+critical_value = 2.0
+
+# Calculate the margin of error
+margin_of_error = critical_value * standard_error
+
+# Calculate the lower and upper bounds of the confidence interval
+lower_bound = sample_mean - margin_of_error
+upper_bound = sample_mean + margin_of_error
+
+# Print the confidence interval
+print("Confidence Interval (5%): [{:.3f}, {:.3f}]".format(lower_bound, upper_bound))
+
+
+
+#c
+print("c: To Calculate the Mean absolute deviation and Standard deviation and interpret the results")
+print("----------------------------------------------------------------------------------------------")
+# Calculate Mean Absolute Deviation (MAD)
+mad_before = np.mean(np.abs(bp_before - mean_before))
+mad_after = np.mean(np.abs(bp_after - mean_after))
+
+print("Mean Absolute Deviation:")
+print("Before: {:.2f}".format(mad_before))
+print("After: {:.2f}".format(mad_after))
+print()
+print("Standard Deviation:")
+print("Before: {:.2f}".format(std_dev_before))
+print("After: {:.2f}".format(std_dev_after))
+
+"""
+Interpretation:
+
+
+Mean Absolute Deviation (MAD): The average absolute difference between each data point and the mean is measured by MAD. The MAD for the 'Blood Pressure Before' column is X, and the MAD for the 'Blood Pressure After' column is Y. When compared to the standard deviation, MAD gives a more robust measure of dispersion that is less sensitive to outliers.
+SD: SD is a measure of the average deviation of data points from the mean. The SD for the 'Blood Pressure Before' column is X, while the SD for the 'Blood Pressure After' column is Y. SD is a popular measure of dispersion that takes into account squared variations from the mean.
+
+
+"""
+
+
+
+#d
+print("d: To Calculate the correlation coefficient and check the significance of it at 1% level of significance")
+print("----------------------------------------------------------------------------------------------------------")
+# Calculate correlation coefficient
+correlation_coefficient = np.corrcoef(bp_before, bp_after)[0, 1]
+
+# Check significance at the 1% level of significance
+n = len(bp_before)
+t_critical = stats.t.ppf(0.995, df=n - 2)
+standard_error = np.sqrt((1 - correlation_coefficient ** 2) / (n - 2))
+t_score = correlation_coefficient / standard_error
+
+# Interpretation of results
+print("Correlation Coefficient: {:.4f}".format(correlation_coefficient))
+print("t-score: {:.4f}".format(t_score))
+print("t-critical (1% level of significance): {:.4f}".format(t_critical))
+print("Significance at 1% level: ", "Significant" if np.abs(t_score) > t_critical else "Not Significant")
+
+#Correlation Coefficient : close to 1 --- strong positive correlation, 
+                          #close to -1 --- strong negative correlation, 
+                          #close to 0 --- weak or no correlation.
+#t-score : standard errors the correlation coefficient is away from zero. 
+          #It is compared to the t-critical value  
+          #At the 1% level of significance, if the t-score exceeds the t-critical value, 
+          #the correlation is considered statistically significant.
+#Significance : t-score > t-critical
+                #there is a significant linear relationship between the 'Blood Pressure Before' and 'Blood Pressure After'.
+
+
