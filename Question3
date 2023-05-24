@@ -1,0 +1,47 @@
+#question 3
+import pandas as pd
+import numpy as np
+
+# Read data from CSV file
+data = pd.read_csv('data.csv')
+
+# Display column names
+print(data.columns)
+"""column_names = data.columns
+print("Column Names:")
+for column in column_names:
+    print(column)"""
+print()
+print()
+
+#a
+print("a:  To Measure the dispersion in both and interpret the results")
+print("-----------------------------------------------------------------")
+# Assuming the correct column names are identified
+bp_before = data[' Blood Pressure Before ']
+bp_after = data[' Blood Pressure After ']
+
+# Dispersion measures
+range_before = np.max(bp_before) - np.min(bp_before)
+range_after = np.max(bp_after) - np.min(bp_after)
+
+variance_before = np.var(bp_before)
+variance_after = np.var(bp_after)
+
+std_dev_before = np.std(bp_before)
+std_dev_after = np.std(bp_after)
+
+# Interpretation of results
+print("Dispersion measures:")
+print("-----------------------")
+print("Before - Range: {:.2f}".format(range_before))
+print("Before - Variance: {:.2f}".format(variance_before))
+print("Before - Standard Deviation: {:.2f}".format(std_dev_before))
+print()
+print("After - Range: {:.2f}".format(range_after))
+print("After - Variance: {:.2f}".format(variance_after))
+print("After - Standard Deviation: {:.2f}".format(std_dev_after))
+
+#range -  difference between the maximum and minimum values 
+#variance - The variance measures the average squared deviation from the mean. A higher variance indicates greater dispersion
+#std - The standard deviation is the square root of the variance
