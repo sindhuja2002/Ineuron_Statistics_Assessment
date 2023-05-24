@@ -1,0 +1,129 @@
+#question 2
+import scipy.stats as stats
+print("Given Details")
+print("--------------------------------------------------------")
+print("Total no. of individuals : 1000")
+print("Mean Height              : 170 cm ")
+print("Standard Deviation       : 10 cm")
+print("The Dataset              : normally distributed")
+print("skewness                 : zero")
+print()
+print()
+print(" a: What percentage of individuals in the dataset have heights between 160 cm and 180 cm")
+print(" b: If we randomly select 100 individuals from the dataset, what is the probability that their average height is greater than 175 cm? ")
+print(" c: Assuming the dataset follows a normal distribution, what is the z-score corresponding to a height of 185 cm?")
+print(" d: We know that 5% of the dataset has heights below a certain value. What is the approximate height corresponding to this threshold?")
+print(" e: Calculate the coefficient of variation (CV) for the dataset")
+print(" f: Calculate the coefficient of variation (CV) for the dataset")
+print()
+print()
+
+print("TYPE a or b or c or d or e or f ")
+while True:
+  got_input=input()
+
+  if got_input== 'a':
+    def calculate_percentage_between(heights, lower_bound, upper_bound):
+        mean = 170
+        std_dev = 10
+
+        z1 = (lower_bound - mean) / std_dev
+        z2 = (upper_bound - mean) / std_dev
+
+        percentage = (stats.norm.cdf(z2) - stats.norm.cdf(z1)) * 100
+        return percentage
+
+    # Example dataset of heights
+    heights = [165, 172, 178, 160, 182, 175, 169, 181, 176, 170]
+
+    # Calculate the percentage
+    percentage = calculate_percentage_between(heights, 160, 180)
+
+    # Normalize the percentage between -1 and 1
+    normalized_percentage = (percentage / 100) 
+
+    # Output the result in the desired format
+    output = f"The normalized area between z = -1 and z = 1 is approximately {normalized_percentage:.4f} , or {percentage:.2f}%"
+    print(output)
+    print()
+    print()
+
+  elif got_input == 'b':
+    def calculate_probability(sample_mean, population_mean, population_std_dev, sample_size):
+      sample_std_dev = population_std_dev / (sample_size ** 0.5)
+      z = (sample_mean - population_mean) / sample_std_dev
+      probability = 1 - stats.norm.cdf(z)
+      return probability
+
+    # Population parameters
+    population_mean = 170
+    population_std_dev = 10
+    # Sample parameters
+    sample_mean = 175
+    sample_size = 100
+    # Calculate the probability
+    probability = calculate_probability(sample_mean, population_mean, population_std_dev, sample_size)
+    # Output the result
+    print(f"The probability that the average height of a randomly selected sample of 100 individuals is greater than 175 cm is approximately {probability:.4f}")
+    print()
+    print()
+
+  elif got_input == 'c':
+    # Height value
+    height = 185
+    # Population parameters
+    population_mean = 170
+    population_std_dev = 10
+    # Calculate the z-score
+    z_score = (height - population_mean) / population_std_dev
+    # Output the result
+    print(f"The z-score corresponding to a height of {height} cm is approximately {z_score:.2f}")
+    print()
+    print()
+
+  elif got_input == 'd':
+    # Cumulative probability threshold
+    cumulative_probability = 0.05
+
+    # Population parameters
+    population_mean = 170
+    population_std_dev = 10
+
+    # Calculate the z-score corresponding to the cumulative probability
+    z_score = stats.norm.ppf(cumulative_probability)  
+    print(f"The value of z_Score is : {z_score}")
+
+    # Calculate the height corresponding to the z-score  z = (x - μ) / σ   -1.645 = (x-170)/10 ----> -16.45 = (x-170) ---->  -16.45+170 = x ----> 153.55
+    height = z_score * population_std_dev + population_mean
+
+    # Output the result
+    print(f"The approximate height corresponding to the threshold where 5% of the dataset has heights below it is approximately {height:.2f} cm")
+    print()
+    print()
+
+  elif got_input== 'e':
+    # Dataset parameters
+    standard_deviation = 10
+    mean = 170
+
+    # Calculate the coefficient of variation
+    coefficient_of_variation = (standard_deviation / mean) * 100
+
+    # Output the result
+    print(f"The coefficient of variation for the dataset is approximately {coefficient_of_variation:.2f}%")
+    print()
+    print()
+
+  elif got_input == 'f':
+    # Calculate the skewness
+    skewness = 0  # As mentioned, the skewness is approximately zero for a normal distribution
+    # Output the result
+    print(f"The skewness of the dataset is approximately {skewness:.2f}.")
+    print("The distribution is approximately symmetric.")
+    print(" Hence, The heights are evenly distributed on both sides of the mean")
+    print()
+    print()
+
+  else:
+    print(f"Re-run the program and Enter correct question alphabet")
+    break
