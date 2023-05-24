@@ -1,0 +1,49 @@
+
+#question 10
+import math
+
+def binomial_coefficient(n, k):
+    return math.comb(n, k)
+
+def binomial_probability(n, k, p):
+    return binomial_coefficient(n, k) * (p**k) * ((1 - p)**(n - k))
+
+def probability_exactly_k_defective(n, k, p):
+    return binomial_probability(n, k, p)
+    
+def probability_at_least_k_defective(n, k, p):
+    cumulative_probability = 0
+    for i in range(k, n + 1):
+        cumulative_probability += binomial_probability(n, i, p)
+    return cumulative_probability
+
+def probability_at_most_k_defective(n, k, p):
+    cumulative_probability = 0
+    for i in range(k + 1):
+        cumulative_probability += binomial_probability(n, i, p)
+    return cumulative_probability
+
+def expected_value(n, p):
+    return n * p
+
+# Parameters
+n = 500  # Total number of light bulbs
+p = 0.05  # Probability of a bulb being defective
+
+# a. Probability of exactly 20 defective bulbs
+#P(X = 20) = C(500, 20) * (0.05)^20 * (1 - 0.05)^(500 - 20)
+prob_20_defective = probability_exactly_k_defective(n, 20, p)
+
+# b. Probability of at least 10 defective bulbs
+prob_at_least_10_defective = probability_at_least_k_defective(n, 10, p)
+
+# c. Probability of at most 15 defective bulbs
+prob_at_most_15_defective = probability_at_most_k_defective(n, 15, p)
+
+# d. Expected number of defective bulbs
+expected_defective = expected_value(n, p)
+
+print("a. Probability of exactly 20 defective bulbs:", prob_20_defective)
+print("b. Probability of at least 10 defective bulbs:", prob_at_least_10_defective)
+print("c. Probability of at most 15 defective bulbs:", prob_at_most_15_defective)
+print("d. Expected number of defective bulbs:", expected_defective)
