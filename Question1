@@ -1,0 +1,21 @@
+#question 1
+"""A university wants to understand the relationship between the SAT scores of its
+applicants and their college GPA. They collect data on 500 students, including their SAT
+scores (out of 1600) and their college GPA (on a 4.0 scale). They find that the correlation
+coefficient between SAT scores and college GPA is 0.7. What does this correlation
+coefficient indicate about the relationship between SAT scores and college GPA?"""
+
+print(""" A correlation value of 0.7 between SAT scores and college GPA suggests that 
+      the two variables have a 'strong positive association'.
+
+The correlation coefficient ranges from -1 to +1, 
+where -1 represents a 'perfect negative correlation' (as one variable increases, the other declines) 
+and +1 represents a 'perfect positive correlation'  (as one variable increases, the other likewise increases).
+
+
+A correlation coefficient of 0.7 indicates that as SAT scores rise, so do college GPAs. 
+This suggests that students who perform well on the SAT have higher college GPAs, and vice versa. 
+
+
+However, it is not the only case as there are many factors for the rule of success and 
+this inference is completely based on the 'given numeric values' and 'correlation coefficient concept'.""")
