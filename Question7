@@ -1,0 +1,86 @@
+#question 7
+import math
+
+# Define the equations
+equation1 = "2Y = 5 - X"
+equation2 = "2X = 8 - 3Y"
+
+# Extract the coefficients from equation12Y = 5 - X
+
+eq1_constant = 5
+eq1_coeff_x = -1
+eq1_coeff_y = 2
+
+# Extract the coefficients from equation2
+eq2_constant = 8
+eq2_coeff_x = 2
+eq2_coeff_y = -3
+
+# Rearrange equation1 to isolate Y
+equation1_rearranged = f"Y = {eq1_coeff_x/eq1_coeff_y}X + {eq1_constant/eq1_coeff_y}"
+
+# Calculate b_yx (byx)
+byx = eq1_coeff_x / eq1_coeff_y
+
+# Rearrange equation2 to isolate X
+equation2_rearranged = f"X = {eq2_constant/eq2_coeff_x} + {eq2_coeff_y/eq2_coeff_x}Y"
+
+# Calculate b_xy (bxy)
+bxy = eq2_coeff_y / eq2_coeff_x
+
+# Calculate the correlation coefficient (r)
+r = math.sqrt(bxy * byx)
+
+# Print the rearranged equations and regression coefficients
+print("Rearranged Equation 1:")
+print(equation1_rearranged)
+print()
+print("Regression coefficient (b_yx):", byx)
+print()
+print("Rearranged Equation 2:")
+print(equation2_rearranged)
+print()
+print("Regression coefficient (b_xy):", bxy)
+print()
+print("Correlation coefficient (r):", r)
+
+
+#a
+print("a: To find Variance of Y")
+print("---------------------------")
+# Given values
+var_x = 4
+correlation_coefficient = 0.8660254037844386
+
+# Calculate the variance of Y
+var_y = (1 - correlation_coefficient**2) * var_x
+
+# Print the variance of Y
+print("Variance of Y:", round(var_y,3))
+
+
+
+#b
+print("b: To find Coefficient of determination of C and Y")
+print("----------------------------------------------------")
+
+# Given correlation coefficient
+correlation_coefficient = 0.8660254037844386
+
+# Calculate the coefficient of determination (R^2)
+r_squared = correlation_coefficient ** 2
+
+# Print the coefficient of determination (R^2)
+print("Coefficient of Determination (R^2):", r_squared)
+print("Since there is no information or equation related to Independent variable C")
+print("It is not possible to calculate the coefficient of determination between C and Y.")
+
+
+
+#c
+print("Standard error of estimate of X on Y and of Y on X")
+print("-----------------------------------------------------")
+print("""However, the equations alone are not sufficient to calculate the standard error of estimate. 
+You would need the actual data points to obtain the predicted values 
+and then calculate the residuals to determine the standard error of estimate
+""")
