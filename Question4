@@ -1,0 +1,12 @@
+#question 4
+# Number of favorable outcomes
+favorable_outcomes = 4
+
+# Total number of possible outcomes
+total_outcomes = 20
+
+# Calculate the probability
+probability = favorable_outcomes / total_outcomes
+
+# Display the result
+print("The probability that the number drawn is a perfect square:", probability,"or",probability*100,"%")
