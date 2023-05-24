@@ -1,0 +1,24 @@
+#question 9
+#To test the hypothesis that the mean scores r same
+#one-way analysis of variance (ANOVA) is used
+import pandas as pd
+import scipy.stats as stats
+
+# Read the Excel file
+data = pd.read_excel('data3.xlsx')
+
+# Perform one-way ANOVA
+fvalue, pvalue = stats.f_oneway(data['exam1'], data['exam2'], data['final exam'])
+print(f"fvalue : {fvalue}")
+print(f"pvalue : {pvalue}")
+print()
+# Interpret the results
+significance_level=0.05
+if pvalue < 0.05:
+    print(f"As pvalue : {pvalue} < significance_level : {significance_level}")
+    print("No,The mean scores of the students are not the same (Reject the null hypothesis) .")
+    highest_score_student = data.iloc[data[['exam1', 'exam2', 'final_exam']].mean(axis=1).idxmax()]['name']
+    print("Student with the highest score:", highest_score_student)
+elif pvalue >= 0.05:
+    print(f"pvalue : {pvalue} >= significance_level : {significance_level}")
+    print("Yes,The mean scores of the students are the same (Fail to reject the null hypothesis).")
